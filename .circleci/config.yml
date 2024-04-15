@@ -1,0 +1,61 @@
+version: 2.1
+
+general:
+  branches:
+    only:
+      - master
+
+machine:
+  environment:
+    PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${HOME}/${mythcord}/node_modules/.bin:${PATH}"
+    NODE_ENV: test
+  node:
+    version: 16
+  npm:
+    version: 6
+
+jobs:
+  compile:
+    docker:
+      - image: circleci/node:16
+    working_directory: ~/mythcord
+    steps:
+      - checkout
+      - run:
+          name: Update NPM
+          command: 'sudo npm install -g npm'
+      - run:
+          name: Install TypeScript and Next.js
+          command: 'sudo npm install -g typescript next'
+      - run:
+          name: Install NPM Dependencies
+          command: 'npm install'
+      - run:
+          name: Run Compile and Test
+          command: 'npm run compile && npm run start:dev'
+  lint:
+    docker:
+      - image: circleci/node:16
+    working_directory: ~/mythcord
+    steps:
+      - checkout
+      - run:
+          name: Update NPM
+          command: 'sudo npm install -g npm'
+      - run:
+          name: Install TypeScript and Next.js
+          command: 'sudo npm install -g typescript next'
+      - run:
+          name: Install NPM Dependencies
+          command: 'npm install'
+      - run:
+          name: Lint code
+          command: 'npm run lint'
+
+workflows:
+  compile-test:
+    jobs:
+      - compile
+  lint-code:
+    jobs:
+      - lint

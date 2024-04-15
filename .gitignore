@@ -1,0 +1,7 @@
+# Directories
+.next
+dist
+node_modules
+
+# Files
+.env

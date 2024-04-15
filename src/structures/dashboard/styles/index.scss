@@ -1,0 +1,139 @@
+@charset "utf-8";
+@import "./mixins";
+
+@import url("https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap");
+
+$inter: "Inter", sans-serif;
+$dmserif-display: "DM Serif Display", serif;
+$dmserif-text: "DM Serif Text", serif;
+
+$primary-black: #131A1C;
+$secondary-black: #232a2c;
+
+$primary-white: #C5C8C9;
+$secondary-white: #bfbfbf;
+
+$primary-green: #6bb05d;
+
+*,
+*::before,
+*::after {
+    border-width: 0;
+    border-style: solid;
+
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    text-rendering: optimizeLegibility;
+
+    touch-action: manipulation;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    -ms-overflow-style: scrollbar;
+}
+
+html,
+body {
+    font-feature-settings: "kern";
+    font-family: $inter;
+    background: $primary-black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Serif Display', serif;
+}
+
+.navbar {
+    .navbar-item {
+        color: $secondary-white;
+    }
+    .navbar-end {
+        .navbar-item {
+            @include font-style(18, normal, 0.3, 500);
+            @include color-opacity($secondary-white, 0.8);
+
+            background: none;
+            margin-left: 28px;
+            margin-right: 28px;
+
+            &:hover {
+                @include color-opacity($secondary-white, 0.5);
+                transition: 0.3s;
+            }
+        }
+    }
+    .navbar-title {
+        @include font-style(34, normal, normal, 800);
+        &:hover {
+            color: $secondary-white;
+            transition: 0.3s;
+        }
+    }
+    .is-active {
+        background: $primary-black;
+    }
+}
+
+.hero-body {
+    .pretitle {
+        @include font-style(18, normal, normal, 500);
+        @include color-opacity($secondary-white, 0.6);
+    }
+    .title {
+        @include font-style(44, normal, 1, 650);
+        color: $primary-white;
+    }
+    .subtitle {
+        @include font-style(24, normal, 0.5, 400);
+        color: $primary-white;
+        font-family: $dmserif-text;
+    }
+}
+
+.call-to-action {
+	display: inline-block;
+	background: inherit;
+	font: inherit;
+	border: 0;
+	outline: 0;
+	padding: 0;
+	transition: all 200ms ease-in;
+	cursor: pointer;
+
+	margin: 0.2rem;
+
+	&-regular {
+		@include font-style(18, normal, normal, 450);
+
+		position: relative;
+		transition: 0.3s;
+		background: $secondary-black;
+		box-shadow: 0 0 0.625rem 0.125rem rgba(0, 0, 0, 0.1);
+		border-radius: 8px;
+		padding: 14px 30px;
+
+		@include color-opacity($secondary-white, 0.8);
+
+		&:hover {
+			background: lighten($color: $secondary-black, $amount: 5);
+			@include color-opacity($secondary-white, 0.8);
+		}
+		&:active,
+		&:focus {
+			color: $primary-white;
+			background: darken($color: $secondary-black, $amount: 10);
+			transition: 0.6s;
+		}
+	}
+}
